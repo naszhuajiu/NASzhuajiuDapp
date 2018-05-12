@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>一起来抓阄</title>
+    <style>
+        .html {
+            height: 100%;
+        }
+        .body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .global {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .global_shutdown {
+            width: 0px;
+            height: 0px;
+            font-size: 0px;
+            pointer-events: none;
+            visibility: hidden;
+        }
+        .main {
+            width: 30%;
+            height: 100%;
+            background: url(img/background.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .top_1 {
+            width: 100%;
+            height: 25%;
+            background: url(img/top_1.png);
+            background-size:contain;
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        .top_2 {
+            width: 100%;
+            height: 25%;
+            background: url(img/top_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .top_3 {
+            width: 100%;
+            height: 25%;
+            background: url(img/top_3.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .center {
+            background-color: #ffffff;
+            width: 100%;
+            height: 50%;
+            opacity: 0.75;
+        }
+        .bottom {
+            width: 100%;
+            height: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom_img1 {
+            width: 80%;
+            height: 100%;
+            background: url(img/bottom.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .bottom_img2 {
+            width: 40%;
+            height: 50%;
+            background: url(img/bottom_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1 {
+            width:100%;
+            height:100%;
+            position: relative;
+        }
+        .page_1_img1 {
+            position:absolute;
+            top:15%;
+            left:20%;
+            width: 20%;
+            height: 6%;
+            background: url(img/page_1_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img2 {
+            position: absolute;
+            top: 35%;
+            left: 20%;
+            width: 20%;
+            height: 10%;
+            background: url(img/page_1_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img3 {
+            position: absolute;
+            top: 57%;
+            left: 20%;
+            width: 20%;
+            height: 10%;
+            background: url(img/page_1_3.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img4 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_1_4.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img5 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_1_5.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img6 {
+            position: absolute;
+            top: 83%;
+            left: 15%;
+            width: 15%;
+            height: 15%;
+            background: url(img/or_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_img7 {
+            position: absolute;
+            top: 83%;
+            left: 15%;
+            width: 15%;
+            height: 15%;
+            background: url(img/or_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_1_text {
+            position: absolute;
+            top: 15%;
+            left: 45%;
+            width: 25%;
+            height: 6%;
+        }
+        .page_1_max {
+            position: absolute;
+            top: 36.5%;
+            left: 45%;
+            width: 25%;
+            height: 6%;
+        }
+        .page_1_selected {
+            position: absolute;
+            top: 58.5%;
+            left: 45%;
+            width: 25%;
+            height: 6%;
+        }
+        .page_1_mess {
+            position: absolute;
+            top: 80%;
+            left: 30%;
+            width: 25%;
+            height: 10%;
+            text-align:center;
+        }
+        .page_1_mess label{
+            color:#ff6a00;
+            width:100%;
+            height:100%;
+        }
+
+        .page_2 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page_2_img1 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_2_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_2_img2 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_2_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_2_img3 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_2_3.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_2_img4 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_2_4.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_2_key{
+            position:absolute;
+            top:10%;
+            left:20%;
+            width:60%;
+            height:10%;
+            text-align:center;
+        }
+        .page_2_key label{
+            color:#ff6a00;
+        }
+        .page_2_text {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 50%;
+            text-align: center;
+            position:relative;
+        }
+            .page_2_text label {
+                position:absolute;
+                top:20%;
+                left:20%;
+                width:60%;
+                height:60%;
+                color: #ff6a00;
+            }
+
+        .page_3 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page_3_img1 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_3_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_3_img2 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_3_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_3_key {
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 60%;
+            height: 10%;
+            text-align: center;
+        }
+            .page_3_key label {
+                color: #ff6a00;
+            }
+        .page_3_text {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 50%;
+            text-align: center;
+            position: relative;
+        }
+            .page_3_text label {
+                position: absolute;
+                top: 20%;
+                left: 20%;
+                width: 60%;
+                height: 60%;
+                color: #ff6a00;
+            }
+        .page_3_mess {
+            position: absolute;
+            top: 80%;
+            left: 30%;
+            width: 25%;
+            height: 10%;
+            text-align: center;
+        }
+            .page_3_mess label {
+                color: #ff6a00;
+                width: 100%;
+                height: 100%;
+            }
+
+        .page_4 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page_4_img1 {
+            position: absolute;
+            top: 35%;
+            left: 25%;
+            width: 10%;
+            height: 6%;
+            background: url(img/page_4_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_4_img2 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_4_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_4_img3 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_4_3.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_4_img4 {
+            position: absolute;
+            top: 83%;
+            left: 15%;
+            width: 15%;
+            height: 15%;
+            background: url(img/or_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_4_img5 {
+            position: absolute;
+            top: 83%;
+            left: 15%;
+            width: 15%;
+            height: 15%;
+            background: url(img/or_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_4_text {
+            position: absolute;
+            top: 35%;
+            left: 45%;
+            width: 25%;
+            height: 6%;
+        }
+        .page_4_mess {
+            position: absolute;
+            top: 80%;
+            left: 30%;
+            width: 25%;
+            height: 10%;
+            text-align: center;
+        }
+            .page_4_mess label {
+                color: #ff6a00;
+                width: 100%;
+                height: 100%;
+            }
+
+        .page_5 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page_5_img1 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_3_1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_5_img2 {
+            position: absolute;
+            top: 75%;
+            left: 65%;
+            width: 20%;
+            height: 20%;
+            background: url(img/page_3_2.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .page_5_key {
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 60%;
+            height: 10%;
+            text-align: center;
+        }
+            .page_5_key label {
+                color: #ff6a00;
+            }
+        .page_5_text {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 50%;
+            text-align: center;
+            position: relative;
+        }
+            .page_5_text label {
+                position: absolute;
+                top: 20%;
+                left: 20%;
+                width: 60%;
+                height: 60%;
+                color: #ff6a00;
+            }
+        .page_5_mess {
+            position: absolute;
+            top: 80%;
+            left: 30%;
+            width: 25%;
+            height: 10%;
+            text-align: center;
+        }
+            .page_5_mess label {
+                color: #ff6a00;
+                width: 100%;
+                height: 100%;
+            }
+
+    </style>
+</head>
+<html class="html">
+<body class="body">
+    <div id="global1" class="global">
+        <div class="main">
+            <div id="top" class="top_1"></div>
+            <div class="center">
+                <div id="page_1" class="page_1">
+                    <div class="page_1_img1"></div>
+                    <input id="page_1_text" type="text" class="page_1_text" />
+                    <div class="page_1_img2"></div>
+                    <select id="page_1_max" class="page_1_max">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <div class="page_1_img3"></div>
+                    <select id="page_1_selected" class="page_1_selected">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                    </select>
+                    <div class="page_1_mess"><label id="page_1_mess" class="page_1_mess"></label></div>
+                    <div id="page_1_button" class="page_1_img4"></div>
+                </div>
+            </div>
+            <div id="bottom" class="bottom"><div class="bottom_img1"></div></div>
+        </div>
+    </div>
+    <div id="global2" class="global_shutdown">
+        <div class="main">
+            <div id="top" class="top_2"></div>
+            <div class="center">
+                <div id="page_2" class="page_2">
+                    <div class="page_2_key">
+                        <label id="page_2_key">Key:12345678901234567890</label>
+                    </div>
+                    <div class="page_2_text">
+                        <label id="page_2_text"></label>
+                    </div>
+                    <div id="page_2_button" class="page_2_img1"></div>
+                </div>
+            </div>
+            <div id="bottom"><div></div></div>
+        </div>
+    </div>
+    <div id="global3" class="global_shutdown">
+        <div class="main">
+            <div id="top" class="top_3"></div>
+            <div class="center">
+                <div id="page_3" class="page_3">
+                    <div class="page_3_key">
+                        <label id="page_3_key"></label>
+                    </div>
+                    <div class="page_3_text">
+                        <label id="page_3_text"></label>
+                    </div>
+                    <div class="page_3_mess"><label id="page_3_mess" class="page_3_mess"></label></div>
+                    <div id="page_3_button" class="page_3_img1"></div>
+                </div>
+            </div>
+            <div id="bottom"><div></div></div>
+        </div>
+    </div>
+    <div id="global4" class="global_shutdown">
+        <div class="main">
+            <div id="top" class="top_1"></div>
+            <div class="center">
+                <div id="page_4" class="page_4">
+                    <div class="page_4_img1"></div>
+                    <input id="page_4_text" class="page_4_text" type="text" />
+                    <div class="page_4_mess"><label id="page_4_mess" class="page_4_mess"></label></div>
+                    <div id="page_4_button" class="page_4_img2"></div>
+                    <div id="page_4_or" class="page_4_img4"></div>
+                </div>
+            </div>
+            <div id="bottom" class="bottom"><div class="bottom_img2"></div></div>
+        </div>
+    </div>
+    <div id="global5" class="global_shutdown">
+        <div class="main">
+            <div id="top" class="top_3"></div>
+            <div class="center">
+                <div id="page_5" class="page_5">
+                    <div class="page_5_key">
+                        <label id="page_5_key"></label>
+                    </div>
+                    <div class="page_5_text">
+                        <label id="page_5_text"></label>
+                    </div>
+                    <div class="page_5_mess"><label id="page_5_mess" class="page_5_mess"></label></div>
+                    <div id="page_5_button" class="page_5_img1"></div>
+                </div>
+            </div>
+            <div class="bottom"><div></div></div>
+        </div>
+    </div>
+    <script src=lib/jquery-3.3.1.min.js></script>
+    <script src=lib/nebPay.js></script>
+    <script src=lib/bootstrap-4.0.0-dist/js/bootstrap.min.js></script>
+    <script src=lib/nebulas.js></script>
+    <script>
+        "use strict";
+
+        var Data = function () {
+            this.key = null;
+            this.text = null;
+            this.max = null;
+            this.selected = null;
+            this.info = null;
+        }
+
+        var data = new Data();
+
+        $("#page_1_button").mousedown(function () {
+            $("#page_1_button").removeClass("page_1_img4");
+            $("#page_1_button").addClass("page_1_img5");
+        })
+        $("#page_1_button").mousemove(function () {
+            $("#page_1_button").removeClass("page_1_img5");
+            $("#page_1_button").addClass("page_1_img4");
+        })
+        $("#page_1_button").mouseup(function () {
+            $("#page_1_button").removeClass("page_1_img5");
+            $("#page_1_button").addClass("page_1_img4");
+            page_1_button();
+        })
+        function page_1_button() {
+            var text = document.getElementById("page_1_text").value;
+            var max = document.getElementById("page_1_max").value;
+            var need = document.getElementById("page_1_selected").value;
+            if (text == "") {
+                document.getElementById("page_1_mess").innerHTML = "请输入内容";
+            }
+            else if ((need - max) >= 0) {
+                document.getElementById("page_1_mess").innerHTML = "选中人数必须小于参与人数";
+            }
+            else {
+                document.getElementById("page_1_mess").innerHTML = "";
+                page_1_button_then();
+            }
+        }
+        function page_1_button_then() {
+            var key = "";
+            for (var i = 0; i < 20; i++) {
+                key += Math.floor(Math.random() * 10);
+            }
+
+            data.key = key;
+            data.text = document.getElementById("page_1_text").value;
+            data.max = document.getElementById("page_1_max").value;
+            data.selected = document.getElementById("page_1_selected").value;
+            data.info = new Array(data.max);
+            for (var i = 0; i < data.max; i++) {
+                data.info[i] = 0;
+            }
+
+            document.getElementById("page_1_mess").innerHTML = "";
+            document.getElementById("page_1_text").value = "";
+            document.getElementById("page_1_max").value = "2";
+            document.getElementById("page_1_selected").value = "1";
+            $("#global1").removeClass("global");
+            $("#global1").addClass("global_shutdown");
+            $("#global2").removeClass("global_shutdown");
+            $("#global2").addClass("global");
+            document.getElementById("page_2_key").innerHTML = "Key:" + data.key;
+            document.getElementById("page_2_text").innerHTML = "点击开始抓阄";
+        }
+        $("#page_1_or").mousedown(function () {
+            $("#page_1_or").removeClass("page_1_img6");
+            $("#page_1_or").addClass("page_1_img7");
+        })
+        $("#page_1_or").mousemove(function () {
+            $("#page_1_or").removeClass("page_1_img7");
+            $("#page_1_or").addClass("page_1_img6");
+        })
+        $("#page_1_or").mouseup(function () {
+            $("#page_1_or").removeClass("page_1_img7");
+            $("#page_1_or").addClass("page_1_img6");
+            document.getElementById("page_1_mess").innerHTML = "";
+            page_1_or();
+        })
+        function page_1_or() {
+            $("#global1").removeClass("global");
+            $("#global1").addClass("global_shutdown");
+            $("#global4").removeClass("global_shutdown");
+            $("#global4").addClass("global");
+        }
+
+        $("#page_2_button").mousedown(function () {
+            $("#page_2_button").removeClass("page_2_img1");
+            $("#page_2_button").addClass("page_2_img2");
+        })
+        $("#page_2_button").mousemove(function () {
+            $("#page_2_button").removeClass("page_2_img2");
+            $("#page_2_button").addClass("page_2_img1");
+        })
+        $("#page_2_button").mouseup(function () {
+            $("#page_2_button").removeClass("page_2_img2");
+            $("#page_2_button").addClass("page_2_img1");
+            selected();
+        })
+        function selected() {
+            if (data.max == 0) {
+                var html = "";
+                for (var i = 0; i < data.info.length; i++) {
+                    var re = "";
+                    if (data.info[i] == 0) re = data.text;
+                    else re = "未抽中";
+                    html = html + "第" + (i + 1) + "位 : " + re + "<br>";
+                }
+
+                document.getElementById("page_2_key").innerHTML = "";
+                document.getElementById("page_2_text").innerHTML = "点击开始抓阄";
+                document.getElementById("page_3_text").innerHTML = html;
+                document.getElementById("page_3_key").innerHTML = "Key:" + data.key + "<br><br>抓阄结果";
+                $("#global2").removeClass("global");
+                $("#global2").addClass("global_shutdown");
+                $("#global3").removeClass("global_shutdown");
+                $("#global3").addClass("global");
+            }
+            else {
+                var rnd = "";
+                var No = data.info.length - data.max + 1;
+                for (var i = 0; i < 5; i++) {
+                    rnd += Math.floor(Math.random() * 10);
+                }
+                rnd = rnd % data.max;
+                if (rnd < data.selected) {
+                    data.info[data.info.length - data.max] = 1;
+                    data.selected--;
+                    data.max--;
+                    document.getElementById("page_2_text").innerHTML = "" + No + ":" + data.text;
+                }
+                else {
+                    data.max--;
+                    document.getElementById("page_2_text").innerHTML = "" + No + ":未抽中";
+                }
+                document.getElementById("page_2_text").innerHTML = "已抽取 " + No + " 位";
+            }
+        }
+
+
+
+        $("#page_3_button").mousedown(function () {
+            $("#page_3_button").removeClass("page_3_img1");
+            $("#page_3_button").addClass("page_3_img2");
+        })
+        $("#page_3_button").mousemove(function () {
+            $("#page_3_button").removeClass("page_3_img2");
+            $("#page_3_button").addClass("page_3_img1");
+        })
+        $("#page_3_button").mouseup(function () {
+            $("#page_3_button").removeClass("page_3_img2");
+            $("#page_3_button").addClass("page_3_img1");
+            save();
+        })
+
+        $("#page_4_button").mousedown(function () {
+            $("#page_4_button").removeClass("page_4_img2");
+            $("#page_4_button").addClass("page_4_img3");
+        })
+        $("#page_4_button").mousemove(function () {
+            $("#page_4_button").removeClass("page_4_img3");
+            $("#page_4_button").addClass("page_4_img2");
+        })
+        $("#page_4_button").mouseup(function () {
+            $("#page_4_button").removeClass("page_4_img3");
+            $("#page_4_button").addClass("page_4_img2");
+            page_4_button();
+        })
+        function page_4_button() {
+            var key = document.getElementById("page_4_text").value;
+            
+            if (key == 0) document.getElementById("page_4_mess").innerHTML = "内容不能为空";
+            else {
+                if (key.length == 20) {
+                    document.getElementById("page_4_mess").innerHTML = key;
+                    //select(key);
+                }
+                else {
+                    document.getElementById("page_4_mess").innerHTML = "Key值格式输入错误";
+                }
+            }
+        }
+        function page_4_button_then2() {
+            $("#global4").removeClass("global");
+            $("#global4").addClass("global_shutdown");
+            $("#global3").removeClass("global_shutdown");
+            $("#global3").addClass("global");
+        }
+
+        $("#page_4_or").mousedown(function () {
+            $("#page_4_or").removeClass("page_4_img4");
+            $("#page_4_or").addClass("page_4_img5");
+        })
+        $("#page_4_or").mousemove(function () {
+            $("#page_4_or").removeClass("page_4_img5");
+            $("#page_4_or").addClass("page_4_img4");
+        })
+        $("#page_4_or").mouseup(function () {
+            $("#page_4_or").removeClass("page_4_img5");
+            $("#page_4_or").addClass("page_4_img4");
+            document.getElementById("page_4_mess").innerHTML = "";
+            page_4_or();
+        })
+        function page_4_or() {
+            $("#global4").removeClass("global");
+            $("#global4").addClass("global_shutdown");
+            $("#global1").removeClass("global_shutdown");
+            $("#global1").addClass("global");
+        }
+
+        $("#page_5_button").mousedown(function () {
+            $("#page_5_button").removeClass("page_5_img1");
+            $("#page_5_button").addClass("page_5_img2");
+        })
+        $("#page_5_button").mousemove(function () {
+            $("#page_5_button").removeClass("page_5_img2");
+            $("#page_5_button").addClass("page_5_img1");
+        })
+        $("#page_5_button").mouseup(function () {
+            $("#page_5_button").removeClass("page_5_img2");
+            $("#page_5_button").addClass("page_5_img1");
+            page_5_button();
+        })
+        function page_5_button() {
+            document.getElementById("page_5_key").innerHTML = "";
+            document.getElementById("page_5_text").innerHTML = "";
+            $("#global5").removeClass("global");
+            $("#global5").addClass("global_shutdown");
+            $("#global1").removeClass("global_shutdown");
+            $("#global1").addClass("global");
+        }
+
+
+        //var address = "n1o5PyK2tR63nPf1xQXSPB8oB8NLr5Vu3Xq";//合约地址
+        var address = "n1qnDJ7Z2a9C6st7QgbUoxWFQBrFQEEn5uh";
+
+        var nebulas = require("nebulas"),
+            Account = nebulas.Account,
+            neb = new nebulas.Neb();
+        neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
+
+        function save() {
+            var from = Account.NewAccount().getAddressString();
+            var value = "0";
+            var nonce = "0";
+            var gas_price = "1000000";
+            var gas_limit = "2000000";
+
+            var string = "";
+            for (var i = 0; i < data.info.length; i++) {
+                string += data.info[i];
+            }
+            var useFunction = "save";
+            var useArgs = "[\"" + data.key + "\",\"" + data.text + "\",\"" + string + "\"]";
+            var contract = {
+                "function": useFunction,
+                "args": useArgs
+            };
+            neb.api.call(from, address, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+                save_then_1(resp);
+            });
+            document.getElementById("page_3_mess").innerHTML = "正在保存";
+        }
+        function save_then_1(resp) {
+            data.key = null;
+            data.text = null;
+            data.info = null;
+            var result = resp.result;
+            if (result === 'null') {
+                document.getElementById("page_3_mess").innerHTML = "null";
+            }
+            else {
+                try {
+                    result = JSON.parse(result)
+                } catch (err) {
+                    document.getElementById("page_3_mess").innerHTML = "eorro:" + err;
+                }
+                if (result.key) {
+                    sava_then_2();
+                }
+                else document.getElementById("page_3_mess").innerHTML = result;
+            }
+        };
+        function sava_then_2() {
+            document.getElementById("page_3_key").innerHTML = "";
+            document.getElementById("page_3_text").innerHTML = "";
+            document.getElementById("page_3_mess").innerHTML = "";
+            $("#global3").removeClass("global");
+            $("#global3").addClass("global_shutdown");
+            $("#global1").removeClass("global_shutdown");
+            $("#global1").addClass("global");
+        }
+
+        function select(key) {
+            var from = Account.NewAccount().getAddressString();
+            var value = "0";
+            var nonce = "0";
+            var gas_price = "1000000";
+            var gas_limit = "2000000";
+
+            var useFunction = "get";
+            var useArgs = "[\"" + key + "\"]";
+            var contract = {
+                "function": useFunction,
+                "args": useArgs
+            };
+            neb.api.call(from, address, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+                document.getElementById("page_4_text").value = "";
+                select_then_1(resp);
+            });
+            document.getElementById("page_4_mess").innerHTML = "正在查询";
+        }
+        function select_then_1(resp) {
+            var result = resp.result;
+            if (result === 'null') {
+                document.getElementById("page_4_mess").innerHTML = "null";
+            }
+            else {
+                try {
+                    result = JSON.parse(result)
+                } catch (err) {
+                    document.getElementById("page_4_mess").innerHTML = "eorro:" + err;
+                }
+                if (result.key) {
+                    select_then_2(result);
+                }
+                else document.getElementById("page_4_mess").innerHTML = result;
+            }
+        }
+        function select_then_2(result) {
+            var html = "";
+            for (var i = 0; i < result.info.length; i++) {
+                var re = "";
+                if (result.info[i] == 0) re = result.text;
+                else re = "未抽中";
+                html = html + "第" + (i + 1) + "位 : " + re + "<br>";
+            }
+            document.getElementById("page_4_text").innerHTML = "";
+            document.getElementById("page_4_mess").innerHTML = "";
+            document.getElementById("page_5_text").innerHTML = html;
+            document.getElementById("page_5_key").innerHTML = "Key:" + result.key + "<br><br>抓阄结果";
+            $("#global4").removeClass("global");
+            $("#global4").addClass("global_shutdown");
+            $("#global5").removeClass("global_shutdown");
+            $("#global5").addClass("global");
+        }
+
+    </script>
+</body>
+</html>
